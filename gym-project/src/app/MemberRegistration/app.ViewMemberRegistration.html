@@ -1,0 +1,71 @@
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+<div class="panel panel-default">
+    <div class="panel-heading">View</div>
+    <div class="panel-body">
+        <form #f="ngForm">
+            <div class="col-md-4">
+                <label for="name">First Name</label>
+                <input type="text" class="form-control" name="MemberFName" [(ngModel)]="MemberModel.MemberFName"
+                    maxlength="50" #refMemberFName="ngModel" id="MemberFName" readonly>       
+            </div>
+            <div class="col-md-4">
+                <label for="name">Last Name</label>
+                <input type="text" class="form-control" name="MemberLName" [(ngModel)]="MemberModel.MemberLName"
+                    maxlength="50" #refMemberLName="ngModel" id="MemberLName" readonly>                
+            </div>
+            <div class="col-md-4">
+                <label for="name">Middle Name</label>
+                <input type="text" class="form-control" name="MemberMName" [(ngModel)]="MemberModel.MemberMName"
+                    maxlength="50" #refMemberMName="ngModel" id="MemberMName" readonly>           
+            </div>
+            <div class="col-md-4">
+                <label for="name">Gender</label>
+                <select required name="Gender" #refgender="ngModel" class="form-control" [(ngModel)]="MemberModel.Gender" disabled=true>
+                    <option value=''>Gender</option>
+                    <option *ngFor="let gender of genderList" [ngValue]="gender.id"  >
+                        {{gender.name}}
+                    </option>
+                </select>                
+            </div>
+            <div class="col-md-4">
+                <label for="name">Age</label>
+                <input type="text" class="form-control" name="Age" [(ngModel)]="MemberModel.Age" maxlength="50" #refAge="ngModel"
+                    id="Age" readonly>                
+            </div>
+            <div class="col-md-4">
+                <label for="name">EmailId</label>
+                <input type="text" class="form-control" name="EmailId" [(ngModel)]="MemberModel.EmailId" maxlength="50"
+                    #refEmailId="ngModel" id="EmailId" readonly>                
+            </div>
+    
+           
+            <div class="col-md-4">
+                <label for="name">Contactno</label>
+                <input type="text" class="form-control" name="Contactno" [(ngModel)]="MemberModel.Contactno" maxlength="10"
+                    #refContactno="ngModel" id="Contactno" readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="name">Address</label>
+                <input type="text" class="form-control" name="Address" [(ngModel)]="MemberModel.Address" maxlength="50"
+                    #refAddress="ngModel" id="Address" readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="name">Amount</label>
+                <input [disabled]="true" type="text" class="form-control" name="Amount" [(ngModel)]="MemberModel.Amount" maxlength="10"
+                    #refAmount="ngModel" id="Amount" readonly>              
+            </div>
+           
+            <div class="col-md-4">           
+                <a style="margin-left: 10px; margin-top:7px;" class="btn btn-info" [routerLink]="['/Member/All']">
+                    All Member </a>
+            </div>
+            <input type="hidden" name="MemberId" value="{{MemberModel.MemberId}}">
+        </form>
+    </div>
+</div>
+<plot-overview 
+    [dataSource]="dataSource" 
+    [totalCount]="totalCount"
+    (onPageSwitch)="switchPage($event)"
+    (Delete)="Delete($event)"
+    ></plot-overview>

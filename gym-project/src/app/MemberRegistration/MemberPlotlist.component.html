@@ -1,0 +1,91 @@
+<h4>All Members</h4>
+<hr>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="example-header">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <!-- SchemeID Column -->
+              
+                <!-- SchemeName Column -->
+                <ng-container matColumnDef="PlotNo">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Plot Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.PlotNo}} </td>
+                </ng-container>
+                <!-- Status Column -->
+                <ng-container matColumnDef="PlotArea">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Plot Area </th>
+                    <td mat-cell *matCellDef="let element"> {{element.PlotArea}} </td>
+                </ng-container>
+                <ng-container matColumnDef="RateperMerla">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Rate per Merla </th>
+                    <td mat-cell *matCellDef="let element"> {{element.RateperMerla}} </td>
+                </ng-container>
+                <ng-container matColumnDef="PriceToBeDecided">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Price To Be Decided </th>
+                    <td mat-cell *matCellDef="let element"> {{element.PriceToBeDecided}} </td>
+                </ng-container>                
+                <ng-container matColumnDef="Total">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Total Amount </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
+                </ng-container>
+                <ng-container matColumnDef="BookingDate">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Booking Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.BookingDate}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="AddPayment">
+                    <th mat-header-cell *matHeaderCellDef> AddPayment </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button (click)="AddPayment(element.Id)"  class="btn btn-info">Add Payment</button>                        
+                           </td>
+                </ng-container>
+
+
+                <!-- Createddate Column -->
+                <!-- <ng-container matColumnDef="ViewAction">
+                    <th mat-header-cell *matHeaderCellDef> ViewAction </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button (click)="ViewAction(element.Id)"  class="btn btn-danger">View</button>                        
+                           </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="EditAction">
+                    <th mat-header-cell *matHeaderCellDef> EditAction </th>
+                    <td mat-cell *matCellDef="let element"> <a class="btn btn-info" [routerLink]="['/Member/Edit/',element.MemberId]"><i
+                                class="fa fa-edit fa-fw"></i>
+                            Edit</a> </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="DeleteAction">
+                    <th mat-header-cell *matHeaderCellDef> DeleteAction </th>
+                    <td mat-cell *matCellDef="let element" (click)="$event.stopPropagation()">
+                        <button mat-button (click)="Delete(element.Id)"  class="btn btn-danger">Delete</button>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="AddPlotAction">
+                    <th mat-header-cell *matHeaderCellDef> AddPlotAction </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button mat-button (click)="AddPlot(element.Id)"  class="btn btn-danger">Add Plot</button>
+                        
+                           </td>
+                </ng-container>
+                 -->
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [length]="totalCount" [pageSize]="paginationService.pageSize" [pageSizeOptions]="paginationService.selectItemsPerPage"
+                (page)="onPageSwitch.emit($event)">
+            </mat-paginator>
+
+        </div>
+    </div>
+</div>

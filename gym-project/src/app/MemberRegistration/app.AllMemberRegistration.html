@@ -1,0 +1,71 @@
+<h4>All Members Data</h4>
+<hr>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="example-header">
+            <mat-form-field>
+                <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+            </mat-form-field>
+        </div>
+
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+                <!-- SchemeID Column -->
+  \
+                <!-- SchemeName Column -->
+                <ng-container matColumnDef="MemberName">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Member Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MemberName}} </td>
+                </ng-container>
+                <!-- Status Column -->
+                <ng-container matColumnDef="Contactno">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact Number </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Contactno}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Address">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Address </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Address}} </td>
+                </ng-container>
+
+                <!-- Createddate Column -->
+                <!-- Createddate Column -->
+
+                <!-- EditAction Column -->
+                <ng-container matColumnDef="EditAction">
+                    <th mat-header-cell *matHeaderCellDef> EditAction </th>
+                    <td mat-cell *matCellDef="let element"> <a class="btn btn-info" [routerLink]="['/Member/Edit/',element.MemberId]"><i
+                                class="fa fa-edit fa-fw"></i>
+                            Edit</a> </td>
+                </ng-container>
+                <!-- DeleteAction Column -->
+                <ng-container matColumnDef="DeleteAction">
+                    <th mat-header-cell *matHeaderCellDef> DeleteAction </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="btn btn-info" (click)="Delete(element.MemberId)">Delete</button>
+                        
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="AddPlotAction">
+                    <th mat-header-cell *matHeaderCellDef> AddPlotAction </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button class="btn btn-info" [routerLink]="['/Member/AttachPlot/',element.MemberId]">Attach Plot</button>
+                        
+                    </td>
+                </ng-container>
+                
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+            <mat-paginator [length]="totalCount"
+    [pageSize]="paginationService.pageSize"
+    [pageSizeOptions]="paginationService.selectItemsPerPage" 
+    (page)="onPageSwitch.emit($event)">
+  </mat-paginator>
+  
+        </div>
+    </div>
+</div>

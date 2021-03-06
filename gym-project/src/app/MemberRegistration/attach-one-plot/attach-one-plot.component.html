@@ -1,0 +1,107 @@
+<link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
+
+<h4>Add  Plot</h4>
+<hr>
+<div *ngIf="message && !errormessage" class="alert alert-success" role="alert">
+    <label>{{ message }}</label>
+  </div>
+  <div *ngIf="errormessage && !message" class="alert alert-danger" role="alert">
+  <label>{{errormessage}}</label>
+  </div>
+<div class="panel panel-default">
+    <div class="panel-heading">Add Plot</div>
+
+    <div class="panel-body">
+        
+        <form #f="ngForm" novalidate (ngSubmit)="onSubmit()">
+            <div class="col-md-4">
+                <label for="name">Plot Number</label>
+                <input type="text" class="form-control" name="PlotNo" [(ngModel)]="_PlotModel.PlotNo"
+                    maxlength="50" #refPlotNumber="ngModel" id="PlotNo" required>
+                <div *ngIf="!refPlotNumber.valid  && (refPlotNumber.dirty || refPlotNumber.touched)" class="alert alert-danger">
+                    <div [hidden]="!refPlotNumber.errors.required">
+                        Plot Number is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Plot Area</label>
+                <input type="text" class="form-control" name="PlotArea" [(ngModel)]="_PlotModel.PlotArea"
+                    maxlength="350" #refPlotArea="ngModel" id="PlotArea" required>
+                <div *ngIf="!refPlotArea.valid  && (refPlotArea.dirty || refPlotArea.touched)" class="alert alert-danger">
+                    <div [hidden]="!refPlotArea.errors.required">
+                        Plot Area is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Rate per Marla</label>
+                <input type="number" class="form-control" name="RateperMarla" [(ngModel)]="_PlotModel.RateperMerla"
+                    maxlength="11" #refRateperMerla="ngModel" id="RateperMarla" required>
+                <div *ngIf="!refRateperMerla.valid  && (refRateperMerla.dirty || refRateperMerla.touched)" class="alert alert-danger">
+                    <div [hidden]="!refRateperMerla.errors.required">
+                        Rate per Merla is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Price To Be Decided</label>
+                <input type="number" class="form-control" name="PriceToBeDecided" [(ngModel)]="_PlotModel.PriceToBeDecided"
+                    maxlength="11" #refPriceToBeDecided="ngModel" id="PriceToBeDecided" required>
+                <div *ngIf="!refPriceToBeDecided.valid  && (refPriceToBeDecided.dirty || refPriceToBeDecided.touched)" class="alert alert-danger">
+                    <div [hidden]="!refPriceToBeDecided.errors.required">
+                        Price To Be Decided is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Total Amount</label>
+                <input type="number" class="form-control" name="TotalAmount" [(ngModel)]="_PlotModel.Total"
+                    maxlength="11" #refTotalAmount="ngModel" id="TotalAmount" required>
+                <div *ngIf="!refTotalAmount.valid  && (refTotalAmount.dirty || refTotalAmount.touched)" class="alert alert-danger">
+                    <div [hidden]="!refTotalAmount.errors.required">
+                        Total Amount is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Booking Date</label>
+                <input type="date" class="form-control" name="Booking Date" [(ngModel)]="_PlotModel.BookingDate"
+                    maxlength="11" #refBookingDate="ngModel" id="BookingDate" required>
+                <div *ngIf="!refBookingDate.valid  && (refBookingDate.dirty || refBookingDate.touched)" class="alert alert-danger">
+                    <div [hidden]="!refBookingDate.errors.required">
+                        Booking Date is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Booking Authority</label>
+                <input type="text" class="form-control" name="BookingAuthority" [(ngModel)]="_PlotModel.BookingAuthority"
+                    maxlength="91" #refBookingAuthority="ngModel" id="BookingAuthority" required>
+                <div *ngIf="!refBookingAuthority.valid  && (refBookingAuthority.dirty || refBookingAuthority.touched)" class="alert alert-danger">
+                    <div [hidden]="!refBookingAuthority.errors.required">
+                        Booking Authority is required
+                    </div>
+                </div>
+            </div>
+           
+            <div class="col-md-4">
+                <label for="name">Time Limit</label>
+                <input type="text" class="form-control" name="TimeLimit" [(ngModel)]="_PlotModel.TimeLimit"
+                    maxlength="91" #refTimeLimit="ngModel" id="TimeLimit" >               
+            </div>
+                      
+            <div class="col-md-4">
+                <button type="submit" style="margin-top: 10px" [disabled]="!f.form.valid" class="btn btn-success">Submit</button>
+                <a style="margin-left: 10px; margin-top:7px;" class="btn btn-info" [routerLink]="['/Member/All']">
+                    All Member </a>
+            </div>          
+        </form>    
+    </div>
+</div>
