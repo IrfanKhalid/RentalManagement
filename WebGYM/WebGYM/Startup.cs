@@ -94,7 +94,7 @@ namespace WebGYM
             services.AddTransient<IUsers, UsersConcrete>();
             services.AddTransient<IUsersInRoles, UsersInRolesConcrete>();
             services.AddTransient<IPaymentDetails, PaymentDetailsConcrete>();
-            services.AddTransient<IRenewal, RenewalConcrete>();
+            //services.AddTransient<IRenewal, RenewalConcrete>();
             services.AddTransient<IReports, ReportsMaster>();
             services.AddTransient<IGenerateRecepit, GenerateRecepitConcrete>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();

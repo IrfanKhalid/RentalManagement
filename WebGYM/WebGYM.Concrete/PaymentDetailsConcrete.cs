@@ -27,40 +27,41 @@ namespace WebGYM.Concrete
         }
         public IQueryable<PaymentDetailsViewModel> GetAll(QueryParameters queryParameters, int userId)
         {
-            IQueryable<PaymentDetailsViewModel> allItems = (from payment in _context.PaymentDetails
-                                                            where payment.Createdby == userId
-                                                            join member in _context.MemberRegistration on payment.MemberID equals member.Id
-                                                            join plan in _context.PlanMaster on payment.PlanID equals plan.PlanID
-                                                            join scheme in _context.SchemeMaster on payment.WorkouttypeID equals scheme.SchemeID
-                                                            select new PaymentDetailsViewModel()
-                                                            {
-                                                                RecStatus = payment.RecStatus,
-                                                                PlanName = plan.PlanName,
-                                                                MemberName = member.MemberFName + '|' + member.MemberMName + '|' + member.MemberLName,                                                                
-                                                                NextRenwalDate = payment.NextRenwalDate,
-                                                                PaymentAmount = payment.PaymentAmount,
-                                                                SchemeName = scheme.SchemeName,
-                                                                PaymentID = payment.PaymentID,
-                                                                PaymentFromdt = payment.PaymentFromdt,
-                                                                PaymentTodt = payment.PaymentTodt
+            //IQueryable<PaymentDetailsViewModel> allItems = (from payment in _context.PaymentDetails
+            //                                                where payment.Createdby == userId
+            //                                                join member in _context.MemberRegistration on payment.MemberID equals member.Id
+            //                                                join plan in _context.PlanMaster on payment.PlanID equals plan.PlanID
+            //                                                join scheme in _context.SchemeMaster on payment.WorkouttypeID equals scheme.SchemeID
+            //                                                select new PaymentDetailsViewModel()
+            //                                                {
+            //                                                    RecStatus = payment.RecStatus,
+            //                                                    PlanName = plan.PlanName,
+            //                                                    MemberName = member.MemberFName + '|' + member.MemberMName + '|' + member.MemberLName,                                                                
+            //                                                    NextRenwalDate = payment.NextRenwalDate,
+            //                                                    PaymentAmount = payment.PaymentAmount,
+            //                                                    SchemeName = scheme.SchemeName,
+            //                                                    PaymentID = payment.PaymentID,
+            //                                                    PaymentFromdt = payment.PaymentFromdt,
+            //                                                    PaymentTodt = payment.PaymentTodt
 
-                                                            }).AsQueryable().OrderBy("PaymentID", queryParameters.IsDescending());
+            //                                                }).AsQueryable().OrderBy("PaymentID", queryParameters.IsDescending());
 
-            if (queryParameters.HasQuery())
-            {
-                allItems = allItems
-                    .Where(x => x.MemberName.ToLowerInvariant().Contains(queryParameters.Query.ToLowerInvariant()));
-            }
+            //if (queryParameters.HasQuery())
+            //{
+            //    allItems = allItems
+            //        .Where(x => x.MemberName.ToLowerInvariant().Contains(queryParameters.Query.ToLowerInvariant()));
+            //}
 
-            return allItems
-                .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
-                .Take(queryParameters.PageCount);
+            //return allItems
+            //    .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
+            //    .Take(queryParameters.PageCount);
+            return null;
         }
 
-        public int Count(int userId)
+        public int Count(int plotNumber)
         {
             var paycount = (from payment in _context.PaymentDetails
-                            where payment.Createdby == userId
+                            where payment.PlotNumber.Equals( plotNumber)
                             select payment).Count();
             return paycount;
         }

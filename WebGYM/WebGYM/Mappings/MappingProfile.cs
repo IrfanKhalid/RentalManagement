@@ -49,7 +49,7 @@ namespace WebGYM.Mappings
 
             CreateMap<AttachPlotViewModel, AttahPlot>()
                 .ForMember(dest => dest.PlotId, opt => opt.MapFrom(src => src.PlotId))
-                .ForMember(dest => dest.MemberId, opt=> opt.MapFrom(src =>src.MemberId))
+                .ForMember(dest => dest.MemberId, opt => opt.MapFrom(src => src.MemberId))
                 .ForMember(dest => dest.PlotNo, opt => opt.MapFrom(src => src.PlotNo))
                 .ForMember(dest => dest.PlotArea, opt => opt.MapFrom(src => src.PlotArea))
                 .ForMember(dest => dest.RateperMerla, opt => opt.MapFrom(src => src.RateperMerla))
@@ -57,7 +57,9 @@ namespace WebGYM.Mappings
                 .ForMember(dest => dest.TotalAmount, opt => opt.MapFrom(src => src.TotalAmount))
                 .ForMember(dest => dest.BookingDate, opt => opt.MapFrom(src => src.BookingDate))
                 .ForMember(dest => dest.BookingAuthority, opt => opt.MapFrom(src => src.BookingAuthority))
-                .ForMember(dest => dest.TimeLimit, opt => opt.MapFrom(src => src.TimeLimit));
+                .ForMember(dest => dest.TimeLimit, opt => opt.MapFrom(src => src.TimeLimit))
+                .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.CustomerName))
+                .ForMember(dest => dest.CustomerNumber, opt => opt.MapFrom(src => src.CustomerNumber));
 
             CreateMap<UsersViewModel, Users>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
@@ -67,6 +69,14 @@ namespace WebGYM.Mappings
                 .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.Password))
                 .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Status, opt => opt.MapFrom(src => src.Status));
+
+            CreateMap<PaymentDetailsViewModel, PaymentDetails>()
+                .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.CustomerName))
+                .ForMember(dest => dest.CustomerNumber, opt => opt.MapFrom(src => src.CustomerNumber))
+                .ForMember(dest => dest.ReceivedAmount, opt => opt.MapFrom(src => src.ReceivedAmount))
+                .ForMember(dest => dest.PlotNumber, opt => opt.MapFrom(src => src.PlotNumber))
+                .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate))
+                .ForMember(dest => dest.PaymentNumber, opt => opt.MapFrom(src => src.PaymentNumber));
 
         }
     }

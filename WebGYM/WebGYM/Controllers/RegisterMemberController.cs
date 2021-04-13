@@ -17,9 +17,9 @@ using WebGYM.ViewModels;
 
 namespace WebGYM.Controllers
 {
-   // [Authorize]
+    // [Authorize]
     [Route("api/[controller]")]
-   // [ApiExplorerSettings(IgnoreApi = true)]
+    // [ApiExplorerSettings(IgnoreApi = true)]
     [ApiController]
     public class RegisterMemberController : ControllerBase
     {
@@ -32,7 +32,7 @@ namespace WebGYM.Controllers
             _urlHelper = urlHelper;
         }
         // GET: api/RegisterMember
-        [HttpGet (Name="GetAllMembers")]
+        [HttpGet(Name = "GetAllMembers")]
         //[Route("GetAllMembers")]
         public IActionResult GetAllMembers([FromQuery] QueryParameters queryParameters)
         {
@@ -261,7 +261,59 @@ namespace WebGYM.Controllers
             }
         }
 
-
-
+        [HttpPost("SavePayment")]
+        public HttpResponseMessage SavePayment([FromBody] PaymentDetailsViewModel member)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    //if (!_memberRegistration.CheckNameExits())
+                    //{
+                    var userId = this.User.FindFirstValue(ClaimTypes.Name);
+                    var automember = AutoMapper.Mapper.Map<PaymentDetails>(member);
+                    var result = _memberRegistration.InsertPayment(automember);
+                    if (result > 0)
+                    {
+                        var response = new HttpResponseMessage()
+                        {
+                            StatusCode = HttpStatusCode.OK
+                        };
+                        return response;
+                    }
+                    else
+                    {
+                        var response = new HttpResponseMessage()
+                        {
+                            StatusCode = HttpStatusCode.BadRequest
+                        };
+                        return response;
+                    }
+                    //}
+                    //else
+                    //{
+                    //    var response = new HttpResponseMessage()
+                    //    {
+                    //        StatusCode = HttpStatusCode.Conflict
+                    //    };
+                    //    return response;
+                    //}
+                }
+                else
+                {
+                    var response = new HttpResponseMessage()
+                    {
+                        StatusCode = HttpStatusCode.BadRequest
+                    };
+                    return response;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        .}
     }
 }
+
+    

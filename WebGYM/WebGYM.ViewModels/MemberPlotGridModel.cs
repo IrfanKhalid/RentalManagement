@@ -9,6 +9,7 @@ namespace WebGYM.ViewModels
         public DateTime? Dob { get; set; }
         public string Contactno { get; set; }
         public string EmailId { get; set; }
-        
+        public string CustomerName { get; set; }
+        public string CustomerNumber { get; set; }
     }
 }
