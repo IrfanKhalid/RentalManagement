@@ -31,25 +31,21 @@ namespace WebGYM.Models
         public decimal RateperMerla { get; set; }
 
         [DisplayName("Price To Be Decided")]
-
         public decimal PriceToBeDecided { get; set; }
-
+        
         [DisplayName("Total Amount")]
-
         public decimal TotalAmount { get; set; }
-
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Booking Date")]
-
         public DateTime BookingDate { get; set; }
 
-
         public string BookingAuthority { get; set; }
-
         public string TimeLimit { get; set; }
-
+    
         [NotMapped]
+        public string CustomerName { get; set; }
+        public string CustomerNumber { get; set; }
 
         [DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreatedDate { get; set; }

@@ -43,19 +43,9 @@ namespace WebGYM.Models
 
         public int ModifiedBy { get; set; }
 
-        //[DisplayName("Joining Date")]
-        //[Required(ErrorMessage = "Please select Joining Date")]
-        //[DataType(DataType.Date), DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        //public DateTime? JoiningDate { get; set; }
 
         [Required(ErrorMessage = "Please enter Address")]
         public string Address { get; set; }
-        //public long? MainMemberId { get; set; }
 
-        //[NotMapped]
-        //[Required(ErrorMessage = "Amount Cannot be Empty")]
-        //public Decimal? Amount { get; set; }
-        //public string MemImagePath { get; set; }
-        //public string MemImagename { get; set; }
     }
 }

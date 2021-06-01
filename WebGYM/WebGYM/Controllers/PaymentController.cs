@@ -27,17 +27,17 @@ namespace WebGYM.Controllers
             _urlHelper = urlHelper;
         }
 
-        // GET: api/Payment
-        [HttpGet(Name = "GetAllPayment")]
-        public IActionResult GetAllPayment([FromQuery] QueryParameters queryParameters)
+        // GET: api/Payment/{id}
+        [HttpGet("GetAllPayment/{id}")]
+        public IActionResult GetAllPayment(string id, [FromQuery] QueryParameters queryParameters)
         {
             try
             {
                 var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.Name));
 
-                List<PaymentDetailsViewModel> allMembers = _paymentDetails.GetAll(queryParameters, userId).ToList();
+                List<PaymentDetailsViewModel> allMembers = _paymentDetails.GetAll(queryParameters, id).ToList();
 
-                var allItemCount = _paymentDetails.Count(userId);
+                var allItemCount = _paymentDetails.Count(id);
 
                 var paginationMetadata = new
                 {
@@ -54,9 +54,9 @@ namespace WebGYM.Controllers
                     value = allMembers
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
         }
 

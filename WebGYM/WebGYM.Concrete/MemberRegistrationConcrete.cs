@@ -136,6 +136,38 @@ namespace WebGYM.Concrete
             }
         }
 
+        public int InsertPayment(PaymentDetails payment)
+        {
+            using (var con = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection")))
+            {
+                con.Open();
+                var sqlTransaction = con.BeginTransaction();
+                var para = new DynamicParameters();
+                para.Add("@CustomerName", payment.CustomerName);
+                para.Add("@CustomerNumber", payment.CustomerNumber);
+                para.Add("@PaymentDate", payment.PaymentDate);
+                para.Add("@PlotNumber", payment.PlotNumber);
+                para.Add("@ReceivedAmount", payment.ReceivedAmount);
+                para.Add("@PaymentNumber", payment.PaymentNumber);
+                para.Add("@CreateDate", DateTime.Now);
+                para.Add("@ModifyDate", DateTime.Now);
+                para.Add("@check", dbType: DbType.Int32, direction: ParameterDirection.Output);
+                int resultMember = con.Execute("sp_InsertPayment", para, sqlTransaction, 0, CommandType.StoredProcedure);
+                int PlotId = para.Get<int>("check");
+                if (PlotId > 0)
+                {
+                    sqlTransaction.Commit();
+                    return PlotId;
+                }
+                else
+                {
+                    sqlTransaction.Rollback();
+                    return 0;
+                }
+                return 0;
+            }
+        }
+
         public int InsertMember(MemberRegistration memberRegistration)
         {
             using (var con = new SqlConnection(_configuration.GetConnectionString("DatabaseConnection")))
@@ -235,6 +267,7 @@ namespace WebGYM.Concrete
         public IQueryable<MemberPlotGridModel> GetAllPlot(QueryParameters queryParameters, int userId)
         {
             IQueryable<MemberPlotGridModel> allItems = (from member in _context.Plot
+                                                        join cmember in _context.MemberRegistration on member.MemberId equals cmember.Id 
                                                         where member.MemberId == userId
                                                                 select new MemberPlotGridModel()
                                                                 {
@@ -246,6 +279,8 @@ namespace WebGYM.Concrete
                                                                     PriceToBeDecided=member.PriceToBeDecided,
                                                                     Total=member.TotalAmount,
                                                                     BookingDate=member.BookingDate,
+                                                                    CustomerName=cmember.MemberFName+cmember.MemberMName+cmember.MemberLName,
+                                                                    CustomerNumber=cmember.Contactno,
                                                                     BookingAuthority=member.BookingAuthority                                                                  
                                                                 });     
 

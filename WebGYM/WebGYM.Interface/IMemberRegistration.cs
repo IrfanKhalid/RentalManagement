@@ -23,5 +23,6 @@ namespace WebGYM.Interface
 
         int PlotCount(int userId);        
         List<MemberResponse> GetMemberNoList(string memberNo, int userId);
+        int InsertPayment(PaymentDetails automember);
     }
 }

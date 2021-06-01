@@ -1,15 +1,18 @@
-﻿using System;
+﻿using Swashbuckle.AspNetCore.Annotations;
+using System;
 
 namespace WebGYM.ViewModels
 {
-    public class PaymentDetailsViewModel
+    [SwaggerSchema(Required = new[] { "Description" })]
+    public class ExpenseViewModel
     {
-        public int PaymentNumber;
-        public string PlotNumber;
-        public string CustomerName;
-        public string CustomerNumber;
-        public DateTime PaymentDate;
-        public string ReceivedAmount;
+        public  int ID { get; set; }
+        public string AccountHead { get; set; }
+        public decimal Amount { get; set; }
+        public DateTime PaymentDate { get; set; }
+        public string Description { get; set; }
+
+
         public DateTime? CreateDate { get; set; }
         public DateTime? ModifyDate { get; set; }
         //public long PaymentID { get; set; }

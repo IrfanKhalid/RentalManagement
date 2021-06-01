@@ -43,8 +43,8 @@ namespace WebGYM.ViewModels
 
         
         public string BookingAuthority { get; set; }
-
-        public string TimeLimit { get; set; }                
-        
+        public string TimeLimit { get; set; }
+        public string CustomerName { get; set; }
+        public string CustomerNumber { get; set; }
     }
 }

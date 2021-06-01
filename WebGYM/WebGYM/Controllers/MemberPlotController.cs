@@ -37,10 +37,10 @@ namespace WebGYM.Controllers
         //[Route("GetAllPlot/{id}")]
         public IActionResult GetAllPlot([FromQuery] QueryParameters queryParameters, int id)
         {
-            var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.Name));
+           var userId = Convert.ToInt32(this.User.FindFirstValue(ClaimTypes.Name));
             List<MemberPlotGridModel> allMembers = _memberRegistration.GetAllPlot(queryParameters, id).ToList();
 
-            var allItemCount = _memberRegistration.PlotCount(userId);
+            var allItemCount = _memberRegistration.PlotCount(id);
 
             var paginationMetadata = new
             {

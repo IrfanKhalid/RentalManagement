@@ -24,5 +24,6 @@ namespace WebGYM.Concrete
         public DbSet<Users> Users { get; set; }
         public DbSet<UsersInRoles> UsersInRoles { get; set; }
         public DbSet<PaymentDetails> PaymentDetails { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
     }
 }
