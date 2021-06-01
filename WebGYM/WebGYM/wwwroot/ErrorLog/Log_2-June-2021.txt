@@ -1,12 +1,12 @@
 
-2/14/2021 10:30:27 AM
+6/2/2021 3:34:44 AM
 ------------------------------------------------------------------------------------------------
-Controller Name :- SchemeDropdown
+Controller Name :- MemberDetailsReport
 Action Method Name :- Get
 ------------------------------------------------------------------------------------------------
 Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
 Message ---
-{0}Invalid object name 'SchemeMaster'.
+{0}Could not find stored procedure 'Usp_GetAllRenwalrecords'.
 Source ---
 {0}Core .Net SqlClient Data Provider
 StackTrace ---
@@ -21,18 +21,14 @@ StackTrace ---
    at System.Data.SqlClient.SqlCommand.RunExecuteReader(CommandBehavior cmdBehavior, RunBehavior runBehavior, Boolean returnStream, TaskCompletionSource`1 completion, Int32 timeout, Task& task, Boolean asyncWrite, String method)
    at System.Data.SqlClient.SqlCommand.ExecuteReader(CommandBehavior behavior)
    at System.Data.SqlClient.SqlCommand.ExecuteDbDataReader(CommandBehavior behavior)
-   at System.Data.Common.DbCommand.ExecuteReader()
-   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.Execute(IRelationalConnection connection, DbCommandMethod executeMethod, IReadOnlyDictionary`2 parameterValues)
-   at Microsoft.EntityFrameworkCore.Storage.Internal.RelationalCommand.ExecuteReader(IRelationalConnection connection, IReadOnlyDictionary`2 parameterValues)
-   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.BufferlessMoveNext(DbContext _, Boolean buffer)
-   at Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerExecutionStrategy.Execute[TState,TResult](TState state, Func`3 operation, Func`3 verifySucceeded)
-   at Microsoft.EntityFrameworkCore.Query.Internal.QueryingEnumerable`1.Enumerator.MoveNext()
-   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider._TrackEntities[TOut,TIn](IEnumerable`1 results, QueryContext queryContext, IList`1 entityTrackingInfos, IList`1 entityAccessors)+MoveNext()
-   at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
+   at System.Data.Common.DbCommand.System.Data.IDbCommand.ExecuteReader(CommandBehavior behavior)
+   at Dapper.SqlMapper.ExecuteReaderWithFlagsFallback(IDbCommand cmd, Boolean wasClosed, CommandBehavior behavior) in C:\projects\dapper\Dapper\SqlMapper.cs:line 1053
+   at Dapper.SqlMapper.QueryImpl[T](IDbConnection cnn, CommandDefinition command, Type effectiveType)+MoveNext() in C:\projects\dapper\Dapper\SqlMapper.cs:line 1081
    at System.Collections.Generic.List`1.AddEnumerable(IEnumerable`1 enumerable)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at WebGYM.Concrete.SchemeMasterConcrete.GetActiveSchemeMasterList() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM.Concrete\SchemeMasterConcrete.cs:line 106
-   at WebGYM.Controllers.SchemeDropdownController.Get() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM\Controllers\SchemeDropdownController.cs:line 31
+   at Dapper.SqlMapper.Query[T](IDbConnection cnn, String sql, Object param, IDbTransaction transaction, Boolean buffered, Nullable`1 commandTimeout, Nullable`1 commandType) in C:\projects\dapper\Dapper\SqlMapper.cs:line 723
+   at WebGYM.Concrete.ReportsMaster.Generate_AllMemberDetailsReport() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM.Concrete\ReportsMaster.cs:line 29
+   at WebGYM.Controllers.MemberDetailsReportController.Get() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM\Controllers\MemberDetailsReportController.cs:line 30
    at lambda_method(Closure , Object , Object[] )
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
    at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -46,14 +42,14 @@ TargetSite ---
 {0}Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
 
 
-2/14/2021 3:46:12 PM
+6/2/2021 3:34:56 AM
 ------------------------------------------------------------------------------------------------
-Controller Name :- SchemeDropdown
+Controller Name :- Period
 Action Method Name :- Get
 ------------------------------------------------------------------------------------------------
 Microsoft.AspNetCore.Mvc.Filters.ExceptionContext
 Message ---
-{0}Invalid object name 'SchemeMaster'.
+{0}Invalid object name 'PeriodTB'.
 Source ---
 {0}Core .Net SqlClient Data Provider
 StackTrace ---
@@ -78,8 +74,8 @@ StackTrace ---
    at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
    at System.Collections.Generic.List`1.AddEnumerable(IEnumerable`1 enumerable)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at WebGYM.Concrete.SchemeMasterConcrete.GetActiveSchemeMasterList() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM.Concrete\SchemeMasterConcrete.cs:line 106
-   at WebGYM.Controllers.SchemeDropdownController.Get() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM\Controllers\SchemeDropdownController.cs:line 31
+   at WebGYM.Concrete.PeriodMasterConcrete.ListofPeriod() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM.Concrete\PeriodMasterConcrete.cs:line 21
+   at WebGYM.Controllers.PeriodController.Get() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM\Controllers\PeriodController.cs:line 30
    at lambda_method(Closure , Object , Object[] )
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
    at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
@@ -93,7 +89,7 @@ TargetSite ---
 {0}Void OnError(System.Data.SqlClient.SqlException, Boolean, System.Action`1[System.Action])
 
 
-2/14/2021 5:50:54 PM
+6/2/2021 3:34:56 AM
 ------------------------------------------------------------------------------------------------
 Controller Name :- SchemeDropdown
 Action Method Name :- Get
@@ -125,7 +121,6 @@ StackTrace ---
    at Microsoft.EntityFrameworkCore.Query.Internal.LinqOperatorProvider.ExceptionInterceptor`1.EnumeratorExceptionInterceptor.MoveNext()
    at System.Collections.Generic.List`1.AddEnumerable(IEnumerable`1 enumerable)
    at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
-   at WebGYM.Concrete.SchemeMasterConcrete.GetActiveSchemeMasterList() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM.Concrete\SchemeMasterConcrete.cs:line 106
    at WebGYM.Controllers.SchemeDropdownController.Get() in F:\RentalManagementSystem\RentalManagement\WebGYM\WebGYM\Controllers\SchemeDropdownController.cs:line 31
    at lambda_method(Closure , Object , Object[] )
    at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)

@@ -17,6 +17,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebGYM.Common;
@@ -30,20 +31,18 @@ namespace WebGYM
     public class Startup
     {
         private IHostingEnvironment _Env;
-        //public Startup(IConfiguration configuration)
-        //{
-        //    Configuration = configuration;
-        //}
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+               .SetBasePath(env.ContentRootPath)
+               .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+               .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+               .AddEnvironmentVariables();
             Configuration = builder.Build();
             _Env = env;
+
         }
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -67,10 +66,10 @@ namespace WebGYM
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
-                {
-                    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                })
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
                 .AddJwtBearer(x =>
                 {
                     x.RequireHttpsMetadata = false;
@@ -94,7 +93,7 @@ namespace WebGYM
             services.AddTransient<IUsers, UsersConcrete>();
             services.AddTransient<IUsersInRoles, UsersInRolesConcrete>();
             services.AddTransient<IPaymentDetails, PaymentDetailsConcrete>();
-            //services.AddTransient<IRenewal, RenewalConcrete>();
+           // services.AddTransient<IRenewal, RenewalConcrete>();
             services.AddTransient<IReports, ReportsMaster>();
             services.AddTransient<IGenerateRecepit, GenerateRecepitConcrete>();
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -118,15 +117,21 @@ namespace WebGYM
             {
                 options.SerializerSettings.ContractResolver = new Newtonsoft.Json.Serialization.DefaultContractResolver();
             });
+            
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
                     builder => builder.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader()
-                        .AllowCredentials()
-                        .WithExposedHeaders("X-Pagination"));
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials()
+                    .WithExposedHeaders("X-Pagination"));
             });
+            if (_Env.IsDevelopment())
+            {
+                
+
+            }
 
             services.AddSwaggerDocumentation();
             #region OLD Working code for swagger configuration
@@ -145,20 +150,30 @@ namespace WebGYM
             {
                 app.UseDeveloperExceptionPage();
                 //Configure Swagger only for development purose not for production app.
-                app.UseSwaggerDocumentation();
+                
+
+              //  c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Gym Web API v1.0");
+//                c.DocumentTitle = "Title Documentation";
+
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
-
+            //app.UseDefaultFiles();
             app.UseStaticFiles();
             app.UseCookiePolicy();
             app.UseAuthentication();
 
             app.UseCors("CorsPolicy");
             #region OLD Working code for Swagger Configuration
-
+            app.UseSwaggerDocumentation();
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "MyAPIV1");
+                //c.RouteTemplate = "MyTestService/swagger/{documentName}/swagger.json";
+            });
             //// Enable middleware to serve generated Swagger as a JSON endpoint.
             //app.UseSwagger();
 
@@ -178,9 +193,6 @@ namespace WebGYM
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
-            
-         
-       
             });
         }
 
@@ -196,8 +208,28 @@ namespace WebGYM
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1.0", new Info { Title = "Main API v1.0", Version = "v1.0" });
+                //c.SwaggerDoc("v1.0", new Info { 
 
+                //    Title = "Main API v1.0", Version = "v1.0" });
+                c.EnableAnnotations();
+                c.SwaggerDoc("v1.0", new OpenApiInfo
+                {
+                    Version = "v1.0",
+                    Title = "Main API v1.0",
+                    Description = "A simple example ASP.NET Core Web API",
+                    TermsOfService = new Uri("https://example.com/terms"),
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Shayne Boyer",
+                        Email = string.Empty,
+                        Url = new Uri("https://twitter.com/spboyer"),
+                    },
+                    License = new OpenApiLicense
+                    {
+                        Name = "Use under LICX",
+                        Url = new Uri("https://example.com/license"),
+                    }
+                });
                 //Locate the XML file being generated by ASP.NET...
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.XML";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
@@ -213,15 +245,15 @@ namespace WebGYM
                 {
                     {"Bearer", new string[] { }},
                 };
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
-                    Name = "Authorization",
-                    In = "header",
-                    Type = "apiKey"
-                });
+                //c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                //{
+                //    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                //    Name = "Authorization",
+                //    In = "header",
+                //    Type = "apiKey"
+                //});
                 //Must require for swagger version > 2.0
-                c.AddSecurityRequirement(security);
+               // c.AddSecurityRequirement(security);
             });
 
             return services;
@@ -232,6 +264,7 @@ namespace WebGYM
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
+
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "Gym Web API v1.0");
                 c.DocumentTitle = "Title Documentation";
                 //Reference link : https://stackoverflow.com/questions/22008452/collapse-expand-swagger-response-model-class

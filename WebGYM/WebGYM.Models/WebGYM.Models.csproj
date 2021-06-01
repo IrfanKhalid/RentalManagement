@@ -47,6 +47,7 @@
     <Compile Include="DynamicExtensions.cs" />
     <Compile Include="AttachPlot.cs" />
     <Compile Include="MemberRegistration.cs" />
+    <Compile Include="Expense.cs" />
     <Compile Include="PaymentDetails.cs" />
     <Compile Include="PeriodTB.cs" />
     <Compile Include="PlanMaster.cs" />

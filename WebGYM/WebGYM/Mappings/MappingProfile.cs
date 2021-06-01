@@ -78,6 +78,14 @@ namespace WebGYM.Mappings
                 .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate))
                 .ForMember(dest => dest.PaymentNumber, opt => opt.MapFrom(src => src.PaymentNumber));
 
+            CreateMap<ExpenseViewModel, Expense>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.ID))
+                .ForMember(dest => dest.AccountHead, opt => opt.MapFrom(src => src.AccountHead))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Amount, opt => opt.MapFrom(src => src.Amount))
+                .ForMember(dest => dest.PaymentDate, opt => opt.MapFrom(src => src.PaymentDate));
+
+
         }
     }
 }

@@ -15,13 +15,12 @@ namespace WebGYM.Models
     {
         [Key]
 
+        [DisplayName("PaymentId")]
         public int PaymentId { get; set; }
-
-
 
         [DisplayName("PaymentNumber")]
 
-        public string PaymentNumber { get; set; }
+        public int PaymentNumber { get; set; }
 
         [DisplayName("PlotNumber")]
 
@@ -37,10 +36,16 @@ namespace WebGYM.Models
         public string CustomerNumber { get; set; }
 
         [DisplayName("PaymentDate")]
-        public string PaymentDate { get; set; }
+        public DateTime PaymentDate { get; set; }
 
         [DisplayName("ReceivedAmount")]
         public string ReceivedAmount { get; set; }
+
+        [DisplayName("CreateDate")]
+        public DateTime CreateDate { get; set; }
+
+        [DisplayName("ModifyDate")]
+        public DateTime ModifyDate { get; set; }
 
 
 
@@ -52,9 +57,6 @@ namespace WebGYM.Models
         //public DateTime PaymentTodt { get; set; }
         //public decimal? PaymentAmount { get; set; }
         //public DateTime NextRenwalDate { get; set; }
-        public DateTime? CreateDate { get; set; }
-        // public int? Createdby { get; set; }
-        public DateTime? ModifyDate { get; set; }
         // public int? ModifiedBy { get; set; }
         //public string RecStatus { get; set; }
         //public long? MemberID { get; set; }

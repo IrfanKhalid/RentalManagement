@@ -312,7 +312,8 @@ namespace WebGYM.Controllers
             {
                 throw e;
             }
-        .}
+        }
+
     }
 }
 
